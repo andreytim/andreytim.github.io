@@ -59,14 +59,23 @@ article .share .twitter:hover {
 #contact-list li:hover .fa-linkedin {
 	color: #1D87BD;
 }
+#contact-list li:hover .fa-github {
+	color: #1D87BD;
+}
+#contact-list li:hover .fa-facebook {
+	color: #1D87BD;
+}
 #contact-list li:hover .fa-envelope {
-	color: #E93E30;
+	color: #1D87BD;
 }
 #contact-list li:hover .fa-pinterest {
-	color: #CC2127;
+	color: #1D87BD;
 }
 #contact-list li:hover .fa-rss {
-	color: #e74c3c;
+	color: #1D87BD;
+}
+#btn-group .fa-bars:hover {
+	color: #1D87BD;
 }
 article .share .facebook:hover {
 	color: #43609C;
@@ -82,8 +91,9 @@ article .share .gplus:hover {
 }
 
 .page-header {
-	color: #e74c3c;
+	color: #805B20;
 	text-shadow: 1px 1px 1px rgba(150, 150, 150, 1);
+	padding: 0 2% 0;
 }
 
 article{
@@ -124,13 +134,13 @@ article.home h1 a,
 article.home h2 a,
 article.home h3 a,
 article.home h4 a {
-	color: #f2756a;
+	color: #8D7248;
 }
 article.home h1 a:hover,
 article.home h2 a:hover,
 article.home h3 a:hover,
 article.home h4 a:hover {
-	color: #e74c3c;
+	color: #805B20;
 }
 
 .author .author-image {
