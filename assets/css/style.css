@@ -4,11 +4,17 @@ body{
 	color: #2c3e50;
 }
 
+.img-thumbnail {
+	border: none;
+	padding:3px;
+}
+
 .sidebar {
-	position: fixed;
+	position: absolute;
 	top: 0px;
 	padding-top: 1%;
 	background-color: #2c3e50;
+	background-image: url('tissue.png');
 	color: #fff;
 }
 
