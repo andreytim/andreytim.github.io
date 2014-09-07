@@ -205,13 +205,13 @@ Seems like we are forced to create <code>(Int|Byte|*)ArrayLists</code> till deat
 <p>To be honest, I’ve found some ways to deal with these questions, but, of course, <em>they are rather dirty hacks than smart elegant tricks</em>. Anyway, let me tell you about it.</p>
 
 <h4 id="approach-to-the-first">Approach to the First.</h4>
-<p>It’s not hard to reformulate the problem in such way: <em>we need to come up with idea of somehow getting the right primitive array inside of our ArrayList</em>. The word “right” here means “corresponding to the type T of generic class <code>ArrayList&lt;T&gt;</code>”. The problem is that this information will be erased at runtime, as we know, and, actually, there’s no adequate way to learn the true type at the moment of instantiation of ArrayList.</p>
+<p>It’s not hard to reformulate the problem in such way: <em>we need to come up with idea of somehow getting the right primitive array inside our ArrayList</em>. The word “right” here means “corresponding to the type T of generic class <code>ArrayList&lt;T&gt;</code>”. The problem is that this information will be erased at runtime, as we know, and, actually, there’s no adequate way to learn the true type at the moment of instantiation of ArrayList.</p>
 
 <p>Here goes my observation: <em>we, actually, don’t need to know the parameter type right at the moment of initialization</em>. We only start caring about it at the moment of the first insertion of something to the collection. </p>
 
 <p>And here goes the solution: <em>at the moment of the first insertion we could directly ask the element being inserted for its actual class and lazily initialize the proper internal array of corresponding primitives</em>. As the collection is Generic and was created with corresponding boxed type parameter by the user, the element being inserted will be of the proper boxed type and the internal array will be created in the right manner.</p>
 
-<p>I’ve used just the described approach in <strong>Jafar</strong> but with a tiny modification: <code>JArrayList&lt;T&gt;</code> is just a proxy for the internal primitive <code>JArrayList(Byte|Int|...)</code>. At the moment of insertion it finds and instantiates the internal list of the primitive type corresponding to type parameter <strong>T</strong>. I’ve made it in such way because now we can have completely different implementations of ArrayLists for different primitive types. This capability was utilized to make <code>JArrayList&lt;Boolean&gt;</code> “bitwise” and therefore much more memory efficient.<br />
+<p>I’ve used just the described approach in <strong>Jafar</strong> but with a tiny modification: <code>JArrayList&lt;T&gt;</code> is just a proxy for the internal primitive <code>JArrayList(Byte|Int|...)</code>. At the moment of the first insertion (through any inserting method) it finds and instantiates the internal list of the primitive type corresponding to type parameter <strong>T</strong>. I’ve made it in such way because now we can have completely different implementations of ArrayLists for different primitive types. This capability was utilized to make <code>JArrayList&lt;Boolean&gt;</code> “bitwise” and therefore much more memory efficient.<br />
 <br />
 <script src="https://gist.github.com/e609c2cd38478d4dec83.js"> </script>
 <br />  </p>
@@ -225,8 +225,9 @@ Now, let’s consider such declaration:<br />
 <br />
 <code>List&lt;Integer&gt; list = new JArrayList&lt;&gt;();</code><br />
 <br />
-When you just change there the interface <strong>List</strong> to <strong>JList</strong>, you will automatically change all method calls <code>list.add(i);</code> in your code with primitive actual argument <strong>i</strong> to overloaded versions without the boxing/unboxing redundancy. Thus, you get better performance.  	 
-The main flaw of this approach is that we can’t overload method <code>public T get(int idx)</code>, because Java won’t distinguish it from <code>public byte get(int idx)</code>. And this is the place where I couldn’t come up with the trick of staying within the same interface but changing the meaning. Shame on me! </p>
+When you just change there the interface <strong>List</strong> to <strong>JList</strong>, you will automatically change all method calls <code>list.add(i);</code> in your code with primitive actual argument <strong>i</strong> to overloaded versions without the boxing/unboxing redundancy. Thus, you get better performance.  	 </p>
+
+<p>The main flaw of this approach is that we can’t overload method <code>public T get(int idx)</code>, because Java won’t distinguish it from <code>public byte get(int idx)</code>. And this is the place where I couldn’t come up with the trick of staying within the same interface but changing the meaning. Shame on me! </p>
 
 <p>I do provide the specific methods <code>public (byte|int|*) get(Byte|Int|*)(int idx)</code> but, of course, it violates my original dream and is the same thing three libraries from the beginning of this post do.</p>
 
@@ -235,11 +236,11 @@ The main flaw of this approach is that we can’t overload method <code>public T
 <h3 id="conclusion">Conclusion</h3>
 
 <p>Well, I’ve danced enough around my impulsive wish and seems like I’ve got not only exciting experience but the library of primitive collections, which could be fun to use in general.
-<a href="https://github.com/andreytim/jafar/tree/master/prim">Jafar</a> has only dynamic arrays so far, but currently I’m working on similar implementations of Maps and Sets, which are even more popular data structures in large scale tasks than dynamic arrays. And again, we would be able to have specific implementations for different types (<em>not only primitive in general</em>) like Suffix Trees for Strings, for example, which could be great deal for the variety of Information Retrieval tasks.  </p>
+<a href="https://github.com/andreytim/jafar/tree/master/prim">Jafar</a> has only dynamic arrays so far, but currently I’m working on similar implementations of Maps and Sets, which are even more popular data structures in large scale tasks than dynamic arrays. And again, we would be able to have specific implementations for different types (<em>not only primitive in general</em>) like Suffix Trees for Strings, for example, which could be a great deal for the variety of Information Retrieval tasks.  </p>
 
 <p>I will be glad to any feedback and despite the fact that I’ve tried to cover my mess with unit tests there’re could be bugs, of course. Maybe there’re any other ideas of solving the problems described above and getting me closer to the dream. Feel free to share it with me! That’s interesting, though maybe not so world changing. </p>
 
-<p>In the next post I want to share my experience in benchmarking all this stuff. How I tried a couple of specific frameworks, then made an effort of implementing my own benchmarking library and ended with using the great profiling and benchmarking tool <a href="http://openjdk.java.net/projects/code-tools/jmh/">jmh</a> making the whole thing comfortably functioning in multi-module Gradle project. Also, I’m going to show some numbers comparing Jafar implementations with the ones from libraries mentioned at the beginning of this post. </p>
+<p>In the next post I want to share my experience in benchmarking all this stuff. How I tried a couple of specific frameworks, then made an effort of implementing my own benchmarking library and ended with using the great profiling and benchmarking tool <a href="http://openjdk.java.net/projects/code-tools/jmh/">jmh</a> making the whole thing comfortably functioning in multi-module Gradle project. Also, I’m going to show some numbers comparing Jafar implementations with the ones from the libraries mentioned at the beginning of this post. </p>
 
 <p>See you!     </p>
 
