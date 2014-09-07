@@ -7,38 +7,85 @@
 		<atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
 		
 			<item>
-				<title>That's the blank sample post</title>
-				<description>&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/p&gt;
+				<title>Let Java Collections be primitive</title>
+				<description>&lt;h3 id=&quot;motivation&quot;&gt;Motivation&lt;/h3&gt;
 
-&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/p&gt;
+&lt;p&gt;Not so long ago I decided to create my own Collections &lt;a href=&quot;https://github.com/andreytim/jafar/tree/master/prim&quot;&gt;library&lt;/a&gt; for primitive types in Java.&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;foo&lt;/span&gt;
-  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;foo&amp;#39;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;So, why should anyone care you ask? &lt;br /&gt;
+Indeed, there’s a couple of really great libraries in Java with the same purpose. &lt;br /&gt;
+Here is the list of the most popular ones, in my mind:&lt;/p&gt;
 
-&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://fastutil.di.unimi.it/&quot;&gt;fastutil&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://trove.starlight-systems.com/&quot;&gt;trove&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://acs.lbl.gov/ACSSoftware/colt/&quot;&gt;colt&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/p&gt;
+&lt;p&gt;I used Colt collections in large scale ML project myself and was quite satisfied with its performance. So, why do I claim that creating something similar could be useful to somebody? The answer is simple. &lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;foo&lt;/span&gt;
-  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;foo&amp;#39;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;em&gt;I don’t want IntArrayList with it’s own API.&lt;br /&gt;
+I don’t want OpenIntIntMaplalala with it’s specific methods.&lt;br /&gt;
+I want my favorite java.util.ArrayList.&lt;br /&gt;
+And I want it to be fast and memory efficient for primitive types.&lt;/em&gt;&lt;/p&gt;
 
-&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/p&gt;
+&lt;h3 id=&quot;discussion&quot;&gt;Discussion&lt;/h3&gt;
 
-&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;People with such impulsive wishes inevitably face problems in the first place.&lt;/em&gt; Well, what problems do we have?&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;foo&lt;/span&gt;
-  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;foo&amp;#39;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h4 id=&quot;first&quot;&gt;First.&lt;/h4&gt;
+&lt;p&gt;How to force Java’s ArrayList to work with primitives and to forget all this boxing/unboxing stuff?
+It wouldn’t be a problem if Java has Generics for primitives. Oh, it would be really nice. &lt;em&gt;Ahhrrr…&lt;/em&gt; But, it hasn’t.&lt;br /&gt;
+Furthermore, even if we made our own beautiful class, we wouldn’t have any obvious way to generify it for primitives.
+Seems like we are forced to create &lt;code&gt;(Int|Byte|*)ArrayLists&lt;/code&gt; till death do us part.&lt;/p&gt;
 
+&lt;h4 id=&quot;second&quot;&gt;Second.&lt;/h4&gt;
+&lt;p&gt;Let’s imagine that we have found the way to make ArrayList&lt;integer&gt; primitive internally. Cool, now it&#39;s much more effective in terms of memory footprint. But the interface List&lt;integer&gt; has no methods working with primitives, only typed ones, furiously demanding Objects and nothing less. How to get rid of this boxing/unboxing overhead?&lt;/integer&gt;&lt;/integer&gt;&lt;/p&gt;
+
+&lt;p&gt;To be honest, I’ve found some ways to deal with these questions, but, of course, &lt;em&gt;they are rather dirty hacks than smart elegant tricks&lt;/em&gt;. Anyway, let me tell you about it.&lt;/p&gt;
+
+&lt;h4 id=&quot;approach-to-the-first&quot;&gt;Approach to the First.&lt;/h4&gt;
+&lt;p&gt;It’s not hard to reformulate the problem in such way: &lt;em&gt;we need to come up with idea of somehow getting the right primitive array inside of our ArrayList&lt;/em&gt;. The word “right” here means “corresponding to the type T of generic class &lt;code&gt;ArrayList&amp;lt;T&amp;gt;&lt;/code&gt;”. The problem is that this information will be erased at runtime, as we know, and, actually, there’s no adequate way to learn the true type at the moment of instantiation of ArrayList.&lt;/p&gt;
+
+&lt;p&gt;Here goes my observation: &lt;em&gt;we, actually, don’t need to know the parameter type right at the moment of initialization&lt;/em&gt;. We only start caring about it at the moment of the first insertion of something to the collection. &lt;/p&gt;
+
+&lt;p&gt;And here goes the solution: &lt;em&gt;at the moment of the first insertion we could directly ask the element being inserted for its actual class and lazily initialize the proper internal array of corresponding primitives&lt;/em&gt;. As the collection is Generic and was created with corresponding boxed type parameter by the user, the element being inserted will be of the proper boxed type and the internal array will be created in the right manner.&lt;/p&gt;
+
+&lt;p&gt;I’ve used just the described approach in &lt;strong&gt;Jafar&lt;/strong&gt; but with a tiny modification: &lt;code&gt;JArrayList&amp;lt;T&amp;gt;&lt;/code&gt; is just a proxy for the internal primitive &lt;code&gt;JArrayList(Byte|Int|...)&lt;/code&gt;. At the moment of insertion it finds and instantiates the internal list of the primitive type corresponding to type parameter &lt;strong&gt;T&lt;/strong&gt;. I’ve made it in such way because now we can have completely different implementations of ArrayLists for different primitive types. This capability was utilized to make &lt;code&gt;JArrayList&amp;lt;Boolean&amp;gt;&lt;/code&gt; “bitwise” and therefore much more memory efficient.&lt;br /&gt;
+&lt;br /&gt;
+&lt;script src=&quot;https://gist.github.com/e609c2cd38478d4dec83.js&quot;&gt; &lt;/script&gt;
+&lt;br /&gt;  &lt;/p&gt;
+
+&lt;h4 id=&quot;approach-to-the-second&quot;&gt;Approach to the Second.&lt;/h4&gt;
+&lt;p&gt;This part is appeared to be a little bit easier but only partially solved. As you could notice above there’s such an interface as &lt;code&gt;JList&lt;/code&gt;. This interface extends the common &lt;code&gt;java.util.List&lt;/code&gt; adding overloaded mutation methods for each primitive type. For example:&lt;br /&gt;
+&lt;br /&gt;
+&lt;script src=&quot;https://gist.github.com/7271b79908013ac98c10.js&quot;&gt; &lt;/script&gt;
+&lt;br /&gt;
+Now, let’s consider such declaration:&lt;br /&gt;
+&lt;br /&gt;
+&lt;code&gt;List&amp;lt;Integer&amp;gt; list = new JArrayList&amp;lt;&amp;gt;();&lt;/code&gt;&lt;br /&gt;
+&lt;br /&gt;
+When you just change there the interface &lt;strong&gt;List&lt;/strong&gt; to &lt;strong&gt;JList&lt;/strong&gt;, you will automatically change all method calls &lt;code&gt;list.add(i);&lt;/code&gt; in your code with primitive actual argument &lt;strong&gt;i&lt;/strong&gt; to overloaded versions without the boxing/unboxing redundancy. Thus, you get better performance.  	 
+The main flaw of this approach is that we can’t overload method &lt;code&gt;public T get(int idx)&lt;/code&gt;, because Java won’t distinguish it from &lt;code&gt;public byte get(int idx)&lt;/code&gt;. And this is the place where I couldn’t come up with the trick of staying within the same interface but changing the meaning. Shame on me! &lt;/p&gt;
+
+&lt;p&gt;I do provide the specific methods &lt;code&gt;public (byte|int|*) get(Byte|Int|*)(int idx)&lt;/code&gt; but, of course, it violates my original dream and is the same thing three libraries from the beginning of this post do.&lt;/p&gt;
+
+&lt;p&gt;Another deficiency is that the client could try to invoke the wrong method. For example, he could try to add &lt;strong&gt;byte&lt;/strong&gt; value to &lt;code&gt;JList&amp;lt;Character&amp;gt;&lt;/code&gt; and the compiler will allow it. In this case he will get an exception of the wrong type at runtime and will be forced to find this bug. But, of course, &lt;a href=&quot;http://www.amazon.com/Effective-Java-Edition-Joshua-Bloch/dp/0321356683&quot;&gt;J.Bloch&lt;/a&gt; would say that this is not right, I think.  &lt;/p&gt;
+
+&lt;h3 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h3&gt;
+
+&lt;p&gt;Well, I’ve danced enough around my impulsive wish and seems like I’ve got not only exciting experience but the library of primitive collections, which could be fun to use in general.
+&lt;a href=&quot;https://github.com/andreytim/jafar/tree/master/prim&quot;&gt;Jafar&lt;/a&gt; has only dynamic arrays so far, but currently I’m working on similar implementations of Maps and Sets, which are even more popular data structures in large scale tasks than dynamic arrays. And again, we would be able to have specific implementations for different types (&lt;em&gt;not only primitive in general&lt;/em&gt;) like Suffix Trees for Strings, for example, which could be great deal for the variety of Information Retrieval tasks.  &lt;/p&gt;
+
+&lt;p&gt;I will be glad to any feedback and despite the fact that I’ve tried to cover my mess with unit tests there’re could be bugs, of course. Maybe there’re any other ideas of solving the problems described above and getting me closer to the dream. Feel free to share it with me! That’s interesting, though maybe not so world changing. &lt;/p&gt;
+
+&lt;p&gt;In the next post I want to share my experience in benchmarking all this stuff. How I tried a couple of specific frameworks, then made an effort of implementing my own benchmarking library and ended with using the great profiling and benchmarking tool &lt;a href=&quot;http://openjdk.java.net/projects/code-tools/jmh/&quot;&gt;jmh&lt;/a&gt; making the whole thing comfortably functioning in multi-module Gradle project. Also, I’m going to show some numbers comparing Jafar implementations with the ones from libraries mentioned at the beginning of this post. &lt;/p&gt;
+
+&lt;p&gt;See you!     &lt;/p&gt;
 </description>
-				<pubDate>Tue, 05 Aug 2014 00:00:00 +0400</pubDate>
-				<link>/general/demo/2014/08/05/train-sample-post.html</link>
-				<guid isPermaLink="true">/general/demo/2014/08/05/train-sample-post.html</guid>
+				<pubDate>Sun, 07 Sep 2014 00:00:00 +0400</pubDate>
+				<link>/java/jafar/2014/09/07/let-java-collections-be-primitive.html</link>
+				<guid isPermaLink="true">/java/jafar/2014/09/07/let-java-collections-be-primitive.html</guid>
 			</item>
 		
 	</channel>
