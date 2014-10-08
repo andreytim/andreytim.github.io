@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+        <loc>http://andreytim.com</loc>
+    </url>
+    
+    
+    <url>
+        <loc>http://andreytim.com/404.html</loc>
+    </url>
+    
+    <url>
+        <loc>http://andreytim.com/about/</loc>
+    </url>
+    
+    <url>
+        <loc>http://andreytim.com/feed.xml</loc>
+    </url>
+    
+    <url>
+        <loc>http://andreytim.com/index.html</loc>
+    </url>
+    
+    <url>
+        <loc>http://andreytim.com/posts/</loc>
+    </url>
+    
+    <url>
+        <loc>http://andreytim.com/sitemap.xml</loc>
+    </url>
+    
+    <url>
+        <loc>http://andreytim.com/tags/</loc>
+    </url>
+    
+    <url>
+        <loc>http://andreytim.com/theme-setup/</loc>
+    </url>
+    
+
+    
+    <url>
+        <loc>http://andreytim.com/java/jafar/let-java-collections-be-primitive/</loc>
+    </url>
+    
+</urlset>

@@ -1,0 +1,305 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>Let Java Collections be primitive &#8211; Soft Thoughts</title>
+<meta name="description" content="When one does Machine Learning in Java in large scale, it's crucial to have effective data structure implementations on hand. In this post I will introduce the easy-to-use dynamic array implementation of my own, which could be useful for large feature vectors or huge bit lists, for example.">
+<meta name="keywords" content="java, primitive collections, arraylist, jafar-prim">
+
+<!-- Twitter Cards -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://andreytim.com/images/">
+<meta name="twitter:title" content="Let Java Collections be primitive">
+<meta name="twitter:description" content="When one does Machine Learning in Java in large scale, it's crucial to have effective data structure implementations on hand. In this post I will introduce the easy-to-use dynamic array implementation of my own, which could be useful for large feature vectors or huge bit lists, for example.">
+<meta name="twitter:creator" content="@shpolsky">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Let Java Collections be primitive">
+<meta property="og:description" content="When one does Machine Learning in Java in large scale, it's crucial to have effective data structure implementations on hand. In this post I will introduce the easy-to-use dynamic array implementation of my own, which could be useful for large feature vectors or huge bit lists, for example.">
+<meta property="og:url" content="http://andreytim.com/java/jafar/let-java-collections-be-primitive/">
+<meta property="og:site_name" content="Soft Thoughts">
+
+
+
+
+
+<link rel="canonical" href="http://andreytim.com/java/jafar/let-java-collections-be-primitive/">
+<link href="http://andreytim.com/feed.xml" type="application/atom+xml" rel="alternate" title="Soft Thoughts Feed">
+<link rel="author" href="https://google.com/+AndreyTimoshpolsky?rel=author">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="http://andreytim.com/assets/css/main.min.css">
+<!-- Webfonts -->
+<link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic" rel="stylesheet" type="text/css">
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- Load Modernizr -->
+<script src="http://andreytim.com/assets/js/vendor/modernizr-2.6.2.custom.min.js"></script>
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="http://andreytim.com/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="http://andreytim.com/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="http://andreytim.com/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://andreytim.com/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://andreytim.com/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://andreytim.com/images/apple-touch-icon-144x144-precomposed.png">
+
+
+
+</head>
+
+<body id="post" >
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+<nav id="dl-menu" class="dl-menuwrapper" role="navigation">
+	<button class="dl-trigger">Open Menu</button>
+	<ul class="dl-menu">
+		<li><a href="http://andreytim.com">Home</a></li>
+		<li>
+			<a href="#">About</a>
+			<ul class="dl-submenu">
+				<li>
+					<img src="http://andreytim.com/images/" alt="Andrey Timoshpolsky photo" class="author-photo">
+					<h4>Andrey Timoshpolsky</h4>
+					<p>Software Engineer. Machine Learning and Distributed Computing practitioner.</p>
+				</li>
+				<li><a href="http://andreytim.com/about/">Learn More</a></li>
+				<li>
+					<a href="mailto:andrey.timoshpolsky@gmail.com"><i class="fa fa-envelope"></i> Email</a>
+				</li>
+				<li>
+					<a href="http://twitter.com/shpolsky"><i class="fa fa-twitter"></i> Twitter</a>
+				</li>
+				<li>
+					<a href="http://facebook.com/andrey.timoshpolsky"><i class="fa fa-facebook"></i> Facebook</a>
+				</li>
+				<li>
+					<a href="https://google.com/+AndreyTimoshpolsky"><i class="fa fa-google-plus"></i> Google+</a>
+				</li>
+				<li>
+					<a href="http://linkedin.com/in/shpolsky"><i class="fa fa-linkedin"></i> LinkedIn</a>
+				</li>
+				<li>
+					<a href="http://github.com/andreytim"><i class="fa fa-github"></i> GitHub</a>
+				</li>
+				
+				
+				
+				
+			</ul><!-- /.dl-submenu -->
+		</li>
+		<li>
+			<a href="#">Posts</a>
+			<ul class="dl-submenu">
+				<li><a href="http://andreytim.com/posts/">All Posts</a></li>
+				<li><a href="http://andreytim.com/tags/">All Tags</a></li>
+			</ul>
+		</li>
+		
+	</ul><!-- /.dl-menu -->
+</nav><!-- /.dl-menuwrapper -->
+
+
+
+
+<div id="main" role="main">
+  <article class="hentry">
+    <header class="header-title">
+      <div class="header-title-wrap">
+        
+          <h1 class="entry-title"><a href="http://andreytim.com/java/jafar/let-java-collections-be-primitive/" rel="bookmark" title="Let Java Collections be primitive">Let Java Collections be primitive</a></h1>
+        
+        <h2>September 07, 2014</h2>
+        
+        <p class="entry-reading-time">
+          <i class="fa fa-clock-o"></i>
+          
+          Reading time ~6 minutes
+        </p><!-- /.entry-reading-time -->
+        
+      </div><!-- /.header-title-wrap -->
+    </header>
+    <div class="entry-content">
+      <h3 id="motivation">Motivation</h3>
+
+<p>Not so long ago I decided to create my own Collections <a href="https://github.com/andreytim/jafar/tree/master/prim">library</a> for primitive types in Java.</p>
+
+<p>So, why should anyone care you ask? <br />
+Indeed, there’s a couple of really great libraries in Java with the same purpose. <br />
+Here is the list of the most popular ones, in my mind:</p>
+
+<ul>
+  <li><a href="http://fastutil.di.unimi.it/">fastutil</a></li>
+  <li><a href="http://trove.starlight-systems.com/">trove</a></li>
+  <li><a href="http://acs.lbl.gov/ACSSoftware/colt/">colt</a></li>
+</ul>
+
+<p>I used Colt collections in large scale ML project myself and was quite satisfied with its performance. So, why do I claim that creating something similar could be useful to somebody? The answer is simple. </p>
+
+<p><em>I don’t want IntArrayList with it’s own API.<br />
+I don’t want OpenIntIntMaplalala with it’s specific methods.<br />
+I want my favorite java.util.ArrayList.<br />
+And I want it to be fast and memory efficient for primitive types.</em></p>
+
+<h3 id="discussion">Discussion</h3>
+
+<p><em>People with such impulsive wishes inevitably face problems in the first place.</em> Well, what problems do we have?</p>
+
+<h4 id="first">First.</h4>
+<p>How to force Java’s ArrayList to work with primitives and to forget all this boxing/unboxing stuff?
+It wouldn’t be a problem if Java has Generics for primitives. Oh, it would be really nice. <em>Ahhrrr…</em> But, it hasn’t.<br />
+Furthermore, even if we made our own beautiful class, we wouldn’t have any obvious way to generify it for primitives.
+Seems like we are forced to create <code>(Int|Byte|*)ArrayLists</code> till death do us part.</p>
+
+<h4 id="second">Second.</h4>
+<p>Let’s imagine that we have found the way to make ArrayList<integer> primitive internally. Cool, now it's much more effective in terms of memory footprint. But the interface List<integer> has no methods working with primitives, only typed ones, furiously demanding Objects and nothing less. How to get rid of this boxing/unboxing overhead?</integer></integer></p>
+
+<p>To be honest, I’ve found some ways to deal with these questions, but, of course, <em>they are rather dirty hacks than smart elegant tricks</em>. Anyway, let me tell you about it.</p>
+
+<h4 id="approach-to-the-first">Approach to the First.</h4>
+<p>It’s not hard to reformulate the problem in such way: <em>we need to come up with idea of somehow getting the right primitive array inside our ArrayList</em>. The word “right” here means “corresponding to the type T of generic class <code>ArrayList&lt;T&gt;</code>”. The problem is that this information will be erased at runtime, as we know, and, actually, there’s no adequate way to learn the true type at the moment of instantiation of ArrayList.</p>
+
+<p>Here goes my observation: <em>we, actually, don’t need to know the parameter type right at the moment of initialization</em>. We only start caring about it at the moment of the first insertion of something to the collection. </p>
+
+<p>And here goes the solution: <em>at the moment of the first insertion we could directly ask the element being inserted for its actual class and lazily initialize the proper internal array of corresponding primitives</em>. As the collection is Generic and was created with corresponding boxed type parameter by the user, the element being inserted will be of the proper boxed type and the internal array will be created in the right manner.</p>
+
+<p>I’ve used just the described approach in <strong>Jafar</strong> but with a tiny modification: <code>JArrayList&lt;T&gt;</code> is just a proxy for the internal primitive <code>JArrayList(Byte|Int|...)</code>. At the moment of the first insertion (through any inserting method) it finds and instantiates the internal list of the primitive type corresponding to type parameter <strong>T</strong>. I’ve made it in such way because now we can have completely different implementations of ArrayLists for different primitive types. This capability was utilized to make <code>JArrayList&lt;Boolean&gt;</code> “bitwise” and therefore much more memory efficient.  </p>
+
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">JArrayList</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="kd">extends</span> <span class="n">AbstractList</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span>
+      <span class="kd">implements</span> <span class="n">JList</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;,</span> <span class="n">RandomAccess</span><span class="o">,</span> <span class="n">java</span><span class="o">.</span><span class="na">io</span><span class="o">.</span><span class="na">Serializable</span> <span class="o">{</span>
+	
+  <span class="cm">/** Internal type specific primitive array list. */</span>
+  <span class="kd">private</span> <span class="n">JList</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">primitiveList</span><span class="o">;</span>
+
+  <span class="nd">@Override</span>
+  <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">add</span><span class="o">(</span><span class="n">E</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">initCheck</span><span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">getClass</span><span class="o">());</span>
+    <span class="k">return</span> <span class="n">primitiveList</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
+  <span class="o">}</span>
+ 
+  <span class="kd">private</span> <span class="kt">void</span> <span class="nf">initCheck</span><span class="o">(</span><span class="n">Class</span><span class="o">&lt;?&gt;</span> <span class="n">clazz</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">notInited</span><span class="o">)</span> <span class="o">{</span>
+      <span class="n">init</span><span class="o">(</span><span class="n">clazz</span><span class="o">);</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+ 
+  <span class="nd">@SuppressWarnings</span><span class="o">(</span><span class="s">&quot;unchecked&quot;</span><span class="o">)</span>
+  <span class="kd">private</span> <span class="kt">void</span> <span class="nf">init</span><span class="o">(</span><span class="n">Class</span><span class="o">&lt;?&gt;</span> <span class="n">clazz</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">primitiveList</span> <span class="o">=</span> <span class="n">PrimTypeUtils</span><span class="o">.</span><span class="na">getTypedPrimInstance</span><span class="o">(</span><span class="n">clazz</span><span class="o">,</span> 
+                        <span class="n">JArrayList</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="n">capacity</span><span class="o">);</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">primitiveList</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nf">IllegalArgumentException</span><span class="o">(</span>
+          <span class="s">&quot;Unsupported type for primitive collection! Type: &quot;</span> <span class="o">+</span> <span class="n">clazz</span><span class="o">);</span>
+	  <span class="o">}</span>
+	<span class="n">notInited</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+  <span class="o">}</span>
+ 
+  <span class="c1">// ...</span>
+<span class="o">}</span></code></pre></div>
+
+<h4 id="approach-to-the-second">Approach to the Second.</h4>
+<p>This part is appeared to be a little bit easier but only partially solved. As you could notice above there’s such an interface as <code>JList</code>. This interface extends the common <code>java.util.List</code> adding overloaded mutation methods for each primitive type. For example:  </p>
+
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">JList</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="kd">extends</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="o">{</span>
+ 
+  <span class="c1">// ...</span>
+ 
+  <span class="kt">boolean</span> <span class="nf">add</span><span class="o">(</span><span class="kt">byte</span> <span class="n">e</span><span class="o">);</span>
+  <span class="kt">boolean</span> <span class="nf">add</span><span class="o">(</span><span class="kt">char</span> <span class="n">e</span><span class="o">);</span>
+  <span class="kt">boolean</span> <span class="nf">add</span><span class="o">(</span><span class="kt">short</span> <span class="n">e</span><span class="o">);</span>
+  <span class="kt">boolean</span> <span class="nf">add</span><span class="o">(</span><span class="kt">int</span> <span class="n">e</span><span class="o">);</span>
+  <span class="kt">boolean</span> <span class="nf">add</span><span class="o">(</span><span class="kt">long</span> <span class="n">e</span><span class="o">);</span>
+  <span class="kt">boolean</span> <span class="nf">add</span><span class="o">(</span><span class="kt">float</span> <span class="n">e</span><span class="o">);</span>
+  <span class="kt">boolean</span> <span class="nf">add</span><span class="o">(</span><span class="kt">double</span> <span class="n">e</span><span class="o">);</span>
+  <span class="kt">boolean</span> <span class="nf">add</span><span class="o">(</span><span class="kt">boolean</span> <span class="n">e</span><span class="o">);</span>
+  
+  <span class="c1">// ...</span>
+  
+<span class="o">}</span></code></pre></div>
+
+<p>Now, let’s consider such declaration:<br />
+<br />
+<code>List&lt;Integer&gt; list = new JArrayList&lt;&gt;();</code><br />
+<br />
+When you just change there the interface <strong>List</strong> to <strong>JList</strong>, you will automatically change all method calls <code>list.add(i);</code> in your code with primitive actual argument <strong>i</strong> to overloaded versions without the boxing/unboxing redundancy. Thus, you get better performance.  	 </p>
+
+<p>The main flaw of this approach is that we can’t overload method <code>public T get(int idx)</code>, because Java won’t distinguish it from <code>public byte get(int idx)</code>. And this is the place where I couldn’t come up with the trick of staying within the same interface but changing the meaning. Shame on me! </p>
+
+<p>I do provide the specific methods <code>public (byte|int|*) get(Byte|Int|*)(int idx)</code> but, of course, it violates my original dream and is the same thing three libraries from the beginning of this post do.</p>
+
+<p>Another deficiency is that the client could try to invoke the wrong method. For example, he could try to add <strong>byte</strong> value to <code>JList&lt;Character&gt;</code> and the compiler will allow it. In this case he will get an exception of the wrong type at runtime and will be forced to find this bug. But, of course, <a href="http://www.amazon.com/Effective-Java-Edition-Joshua-Bloch/dp/0321356683">J.Bloch</a> would say that this is not right, I think.  </p>
+
+<h3 id="conclusion">Conclusion</h3>
+
+<p>Well, I’ve danced enough around my impulsive wish and seems like I’ve got not only exciting experience but the library of primitive collections, which could be fun to use in general.
+<a href="https://github.com/andreytim/jafar/tree/master/prim">Jafar</a> has only dynamic arrays so far, but currently I’m working on similar implementations of Maps and Sets, which are even more popular data structures in large scale tasks than dynamic arrays. And again, we would be able to have specific implementations for different types (<em>not only primitive in general</em>) like Suffix Trees for Strings, for example, which could be a great deal for the variety of Information Retrieval tasks.  </p>
+
+<p>I will be glad to any feedback and despite the fact that I’ve tried to cover my mess with unit tests there’re could be bugs, of course. Maybe there’re any other ideas of solving the problems described above and getting me closer to the dream. Feel free to share it with me! That’s interesting, though maybe not so world changing. </p>
+
+<p>In the next post I want to share my experience in benchmarking all this stuff. How I tried a couple of specific frameworks, then made an effort of implementing my own benchmarking library and ended with using the great profiling and benchmarking tool <a href="http://openjdk.java.net/projects/code-tools/jmh/">jmh</a> making the whole thing comfortably functioning in multi-module Gradle project. Also, I’m going to show some numbers comparing Jafar implementations with the ones from the libraries mentioned at the beginning of this post. </p>
+
+<p>See you!     </p>
+
+      <footer class="entry-meta">
+        <span class="entry-tags"><a href="http://andreytim.com/tags/#java" title="Pages tagged java" class="tag">java</a><a href="http://andreytim.com/tags/#primitive collections" title="Pages tagged primitive collections" class="tag">primitive collections</a><a href="http://andreytim.com/tags/#arraylist" title="Pages tagged arraylist" class="tag">arraylist</a><a href="http://andreytim.com/tags/#jafar-prim" title="Pages tagged jafar-prim" class="tag">jafar-prim</a></span>
+        <span><a href="http://andreytim.com/java/jafar/let-java-collections-be-primitive/" rel="bookmark" title="Let Java Collections be primitive">Let Java Collections be primitive</a> was published on <span class="entry-date date published updated"><time datetime="2014-09-07T00:00:00+04:00">September 07, 2014</time></span></span>
+        
+        <span class="author vcard"><span class="fn"><a href="http://andreytim.com/about/" title="About Andrey Timoshpolsky">Andrey Timoshpolsky</a></span></span>
+        
+      </footer>
+    </div><!-- /.entry-content -->
+    
+    
+    <div class="read-more">
+      
+      <div class="read-more-list">
+        
+      </div><!-- /.read-more-list -->
+      
+    </div><!-- /.read-more -->
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrapper">
+  <footer role="contentinfo">
+    <span>&copy; 2014 Andrey Timoshpolsky. Powered by <a href="http://jekyllrb.com">Jekyll</a> using the <a href="http://mademistakes.com/hpstr/">HPSTR Theme</a>.</span>
+  </footer>
+</div><!-- /.footer-wrapper -->
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="http://andreytim.com/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="http://andreytim.com/assets/js/scripts.min.js"></script>
+
+<!-- Asynchronous Google Analytics snippet -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-54767687-1', 'auto');  
+  ga('require', 'linkid', 'linkid.js');
+  ga('send', 'pageview');
+</script>
+
+	        
+
+</body>
+</html>
