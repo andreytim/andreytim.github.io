@@ -4,7 +4,7 @@
 <generator uri="https://github.com/mojombo/jekyll">Jekyll</generator>
 <link rel="self" type="application/atom+xml" href="http://andreytim.com/feed.xml" />
 <link rel="alternate" type="text/html" href="http://andreytim.com" />
-<updated>2014-11-16T00:30:50+03:00</updated>
+<updated>2014-11-16T00:32:17+03:00</updated>
 <id>http://andreytim.com/</id>
 <author>
   <name>Andrey Timoshpolsky</name>
@@ -14,7 +14,7 @@
 
 
 <entry>
-  <title type="html"><![CDATA[BS in a Rotated Sorted Array with Duplicates]]></title>
+  <title type="html"><![CDATA[BS for rotated sorted array with duplicates]]></title>
  <link rel="alternate" type="text/html" href="http://andreytim.com/java/algorithms/bs-in-a-rotated-sorted-array-with-duplicates/" />
   <id>http://andreytim.com/java/algorithms/bs-in-a-rotated-sorted-array-with-duplicates</id>
   <published>2014-11-15T00:00:00+03:00</published>
@@ -64,7 +64,7 @@
 
 &lt;p&gt;Hope, it will be useful for somebody.&lt;/p&gt;
 
-  &lt;p&gt;&lt;a href=&quot;http://andreytim.com/java/algorithms/bs-in-a-rotated-sorted-array-with-duplicates/&quot;&gt;BS in a Rotated Sorted Array with Duplicates&lt;/a&gt; was originally published by Andrey Timoshpolsky at &lt;a href=&quot;http://andreytim.com&quot;&gt;Soft Thoughts&lt;/a&gt; on November 15, 2014.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;http://andreytim.com/java/algorithms/bs-in-a-rotated-sorted-array-with-duplicates/&quot;&gt;BS for rotated sorted array with duplicates&lt;/a&gt; was originally published by Andrey Timoshpolsky at &lt;a href=&quot;http://andreytim.com&quot;&gt;Soft Thoughts&lt;/a&gt; on November 15, 2014.&lt;/p&gt;</content>
 </entry>
 
 
