@@ -4,7 +4,7 @@
 <generator uri="https://github.com/mojombo/jekyll">Jekyll</generator>
 <link rel="self" type="application/atom+xml" href="http://andreytim.com/feed.xml" />
 <link rel="alternate" type="text/html" href="http://andreytim.com" />
-<updated>2014-11-16T00:45:55+03:00</updated>
+<updated>2014-11-16T00:46:48+03:00</updated>
 <id>http://andreytim.com/</id>
 <author>
   <name>Andrey Timoshpolsky</name>
@@ -24,7 +24,9 @@
     <uri>http://andreytim.com</uri>
     <email>andrey.timoshpolsky@gmail.com</email>
   </author>
-  <content type="html">&lt;p&gt;This tiny note is about a quite popular problem which is often being asked at interviews for software engineers. A huge pile of different solutions were already proposed, but even in such a great book like “Cracking the Coding Interview” by G.Laakmann the solution looks too cumbersome and too long. I’ve tried to make it a bit more concise and get rid of ineficient recursion. So, check it out.  &lt;/p&gt;
+  <content type="html">&lt;h3 id=&quot;intro&quot;&gt;Intro&lt;/h3&gt;
+
+&lt;p&gt;This tiny note is about a quite popular problem which is often being asked at interviews for software engineers. A huge pile of different solutions were already proposed, but even in such a great book like “Cracking the Coding Interview” by G.Laakmann the solution looks too cumbersome and too long. I’ve tried to make it a bit more concise and get rid of ineficient recursion. So, check it out.  &lt;/p&gt;
 
 &lt;h3 id=&quot;details&quot;&gt;Details&lt;/h3&gt;
 
