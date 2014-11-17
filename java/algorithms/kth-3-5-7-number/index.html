@@ -153,8 +153,10 @@ Here is an implementation in Java:  </p>
 <span class="o">}</span></code></pre></div>
 
 <p>Here, p3, p5 and p7 are the indices of the next number which will be multiplied by 3, 5 or 7 respectively. And there could be a few questions that I’m gonna try to answer (in my own words :)):<br />
-1. How do we get rid of inevitable duplicates? Well, as we always pick the next smallest number we will pick duplicates (like 3x5 and 5x3) at the same single step and increment both pointers.<br />
-2. Why will we cover all numbers with such approach and won’t miss anything? Because during the calculation we actually try to multiply all number that we already processed to our three primes. In other words, having calculated every number before some i, we try to increment by 1 the power of each prime factor in (3^p3)x(5^p5)x(7^p7).<br />
+1. <em>How do we get rid of inevitable duplicates?</em><br />
+Well, as we always pick the next smallest number we will pick duplicates (like 3x5 and 5x3) at the same single step and increment both pointers.<br />
+2. <em>Why will we cover all numbers with such approach and won’t miss anything?</em><br />
+Because during the calculation we actually try to multiply every number that we already processed to our three primes. In other words, having calculated every number before some i, we try to increment by 1 the power of each prime factor in (3^p3)x(5^p5)x(7^p7).<br />
 You can find the full working code with the test cases on my <a href="https://github.com/andreytim/jafar/blob/master/problems/src/main/java/com/andreytim/jafar/problems/numeric/P16_MultiplesOf357.java">github</a>.  </p>
 
 <p>Hope, it will be useful for somebody.</p>

@@ -4,7 +4,7 @@
 <generator uri="https://github.com/mojombo/jekyll">Jekyll</generator>
 <link rel="self" type="application/atom+xml" href="http://andreytim.com/feed.xml" />
 <link rel="alternate" type="text/html" href="http://andreytim.com" />
-<updated>2014-11-18T00:08:33+03:00</updated>
+<updated>2014-11-18T00:10:44+03:00</updated>
 <id>http://andreytim.com/</id>
 <author>
   <name>Andrey Timoshpolsky</name>
@@ -49,8 +49,10 @@ Here is an implementation in Java:  &lt;/p&gt;
 &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;Here, p3, p5 and p7 are the indices of the next number which will be multiplied by 3, 5 or 7 respectively. And there could be a few questions that I’m gonna try to answer (in my own words :)):&lt;br /&gt;
-1. How do we get rid of inevitable duplicates? Well, as we always pick the next smallest number we will pick duplicates (like 3x5 and 5x3) at the same single step and increment both pointers.&lt;br /&gt;
-2. Why will we cover all numbers with such approach and won’t miss anything? Because during the calculation we actually try to multiply all number that we already processed to our three primes. In other words, having calculated every number before some i, we try to increment by 1 the power of each prime factor in (3^p3)x(5^p5)x(7^p7).&lt;br /&gt;
+1. &lt;em&gt;How do we get rid of inevitable duplicates?&lt;/em&gt;&lt;br /&gt;
+Well, as we always pick the next smallest number we will pick duplicates (like 3x5 and 5x3) at the same single step and increment both pointers.&lt;br /&gt;
+2. &lt;em&gt;Why will we cover all numbers with such approach and won’t miss anything?&lt;/em&gt;&lt;br /&gt;
+Because during the calculation we actually try to multiply every number that we already processed to our three primes. In other words, having calculated every number before some i, we try to increment by 1 the power of each prime factor in (3^p3)x(5^p5)x(7^p7).&lt;br /&gt;
 You can find the full working code with the test cases on my &lt;a href=&quot;https://github.com/andreytim/jafar/blob/master/problems/src/main/java/com/andreytim/jafar/problems/numeric/P16_MultiplesOf357.java&quot;&gt;github&lt;/a&gt;.  &lt;/p&gt;
 
 &lt;p&gt;Hope, it will be useful for somebody.&lt;/p&gt;
