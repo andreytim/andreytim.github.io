@@ -137,8 +137,9 @@
 <p>The main approach is following:  </p>
 
 <ul>
-  <li>we want to do everything at one blow, so - no repetitive for-loops;</li>
-  <li>we don’t need to consider cases of X and O separately, so, we just compare the current cell with the first cell of this row/column/diagonal and if they are different then this row/column/diaginal is not winning. If we compared everything and our flags are still true than we can return the first cell of corresponding row/column/diagonal as the winner.  </li>
+  <li>as usually, we want to check every row, column and diagonal for being fully filled by X-s or O-s;</li>
+  <li>we want to do everything at one blow, so - no repetitive similarly looking for-loops;</li>
+  <li>we don’t need to consider cases of X and O separately. We just compare the current cell with the first cell of this row/column/diagonal and if they are different then this row/column/diaginal is not winning. If we compared everything and our flags are still true than we can return the first cell of corresponding row/column/diagonal as the winner.  </li>
 </ul>
 
 <p>That’s, actually, all.  </p>
