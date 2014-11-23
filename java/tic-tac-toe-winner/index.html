@@ -134,11 +134,16 @@
 
 <h3 id="details">Details</h3>
 
-<p>The main approach is following:
-* we want to do everything at on blow, so - no repetitive for-loops;
-* we don’t need to consider cases of X and O separately, so, we just compare the current cell with the first cell of this row/column/diagonal and if they are different then this row/column/diaginal is not winning. If we compared everything and our flags are still true than we can return the first cell of corresponding row/column/diagonal as the winner.<br />
-That’s, actually, all.<br />
-Here’s the Java code and it looks pretty short and understandable.  </p>
+<p>The main approach is following:  </p>
+
+<ul>
+  <li>we want to do everything at one blow, so - no repetitive for-loops;</li>
+  <li>we don’t need to consider cases of X and O separately, so, we just compare the current cell with the first cell of this row/column/diagonal and if they are different then this row/column/diaginal is not winning. If we compared everything and our flags are still true than we can return the first cell of corresponding row/column/diagonal as the winner.  </li>
+</ul>
+
+<p>That’s, actually, all.  </p>
+
+<p>Here’s the Java code and it looks pretty short and understandable.  </p>
 
 <div class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">private</span> <span class="kd">static</span> <span class="kd">enum</span> <span class="n">State</span> <span class="o">{</span> <span class="n">X</span><span class="o">,</span> <span class="n">O</span> <span class="o">}</span>
 
@@ -160,8 +165,8 @@ Here’s the Java code and it looks pretty short and understandable.  </p>
             <span class="k">if</span> <span class="o">(</span><span class="n">col</span><span class="o">)</span> <span class="k">return</span> <span class="n">board</span><span class="o">[</span><span class="mi">0</span><span class="o">][</span><span class="n">i</span><span class="o">];</span> <span class="c1">// current i-th column is winning</span>
         <span class="o">}</span>
     <span class="o">}</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">diag</span><span class="o">)</span> <span class="k">return</span> <span class="n">board</span><span class="o">[</span><span class="mi">0</span><span class="o">][</span><span class="mi">0</span><span class="o">];</span> <span class="c1">// top-left to bottom-right diagonal is winning</span>
-    <span class="k">else</span> <span class="nf">if</span> <span class="o">(</span><span class="n">bdiag</span><span class="o">)</span> <span class="k">return</span> <span class="n">board</span><span class="o">[</span><span class="mi">0</span><span class="o">][</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="o">];</span> <span class="c1">// bottom-left to top-right diagonal is winning</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">diag</span><span class="o">)</span> <span class="k">return</span> <span class="n">board</span><span class="o">[</span><span class="mi">0</span><span class="o">][</span><span class="mi">0</span><span class="o">];</span> <span class="c1">// T-L to B-R diagonal is winning</span>
+    <span class="k">else</span> <span class="nf">if</span> <span class="o">(</span><span class="n">bdiag</span><span class="o">)</span> <span class="k">return</span> <span class="n">board</span><span class="o">[</span><span class="mi">0</span><span class="o">][</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="o">];</span> <span class="c1">// B-L to T-R diagonal is winning</span>
     <span class="k">else</span> <span class="k">return</span> <span class="kc">null</span><span class="o">;</span> <span class="c1">// we return null if there&#39;s no winner</span>
 <span class="o">}</span></code></pre></div>
 
