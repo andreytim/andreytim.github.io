@@ -142,9 +142,9 @@
   <li>we don’t need to consider cases of X and O separately. We just compare the current cell with the first cell of this row/column/diagonal and if they are different then this row/column/diaginal is not winning. If we compared everything and our flags are still true than we can return the first cell of corresponding row/column/diagonal as the winner.  </li>
 </ul>
 
-<p>That’s, actually, all.  </p>
+<p>That’s all, actually.  </p>
 
-<p>Here’s the Java code and it looks pretty short and understandable.  </p>
+<p>Here’s the Java code and it looks pretty short and understandable, in my opinion.  </p>
 
 <div class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">private</span> <span class="kd">static</span> <span class="kd">enum</span> <span class="n">State</span> <span class="o">{</span> <span class="n">X</span><span class="o">,</span> <span class="n">O</span> <span class="o">}</span>
 

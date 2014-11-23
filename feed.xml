@@ -4,7 +4,7 @@
 <generator uri="https://github.com/mojombo/jekyll">Jekyll</generator>
 <link rel="self" type="application/atom+xml" href="http://andreytim.com/feed.xml" />
 <link rel="alternate" type="text/html" href="http://andreytim.com" />
-<updated>2014-11-23T14:57:52+03:00</updated>
+<updated>2014-11-23T14:59:36+03:00</updated>
 <id>http://andreytim.com/</id>
 <author>
   <name>Andrey Timoshpolsky</name>
@@ -38,9 +38,9 @@
   &lt;li&gt;we don’t need to consider cases of X and O separately. We just compare the current cell with the first cell of this row/column/diagonal and if they are different then this row/column/diaginal is not winning. If we compared everything and our flags are still true than we can return the first cell of corresponding row/column/diagonal as the winner.  &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;That’s, actually, all.  &lt;/p&gt;
+&lt;p&gt;That’s all, actually.  &lt;/p&gt;
 
-&lt;p&gt;Here’s the Java code and it looks pretty short and understandable.  &lt;/p&gt;
+&lt;p&gt;Here’s the Java code and it looks pretty short and understandable, in my opinion.  &lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;enum&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;State&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;O&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
 
