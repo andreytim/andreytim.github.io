@@ -4,7 +4,7 @@
 <generator uri="https://github.com/mojombo/jekyll">Jekyll</generator>
 <link rel="self" type="application/atom+xml" href="http://andreytim.com/feed.xml" />
 <link rel="alternate" type="text/html" href="http://andreytim.com" />
-<updated>2014-11-23T14:46:08+03:00</updated>
+<updated>2014-11-23T14:48:11+03:00</updated>
 <id>http://andreytim.com/</id>
 <author>
   <name>Andrey Timoshpolsky</name>
@@ -26,7 +26,7 @@
   </author>
   <content type="html">&lt;h3 id=&quot;intro&quot;&gt;Intro&lt;/h3&gt;
 
-&lt;p&gt;This tiny post is about a simple problem of determining the winner of a Tic-Tac-Toe game by its current state of the board. My goal was not to invent a new solution as it’s quite straight-forward but to make the code as more concise and simple as possible, because there are a lot of examples of cumbersome, long and repetitive code on the web. Check it out and let me know if you know some ways to improve it further.&lt;/p&gt;
+&lt;p&gt;This tiny post is about a simple problem of determining the winner of a Tic-Tac-Toe game by its current state of the board. My goal was not to invent a new solution as it’s quite straight-forward but to make the code as more concise and simple as possible, because there are a lot of examples of cumbersome, long and repetitive code on the web. Check it out and let me know if you find some ways to improve the code further.&lt;/p&gt;
 
 &lt;h3 id=&quot;details&quot;&gt;Details&lt;/h3&gt;
 
