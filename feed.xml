@@ -4,7 +4,7 @@
 <generator uri="https://github.com/mojombo/jekyll">Jekyll</generator>
 <link rel="self" type="application/atom+xml" href="http://andreytim.com/feed.xml" />
 <link rel="alternate" type="text/html" href="http://andreytim.com" />
-<updated>2014-11-28T22:55:38+03:00</updated>
+<updated>2014-11-28T22:58:01+03:00</updated>
 <id>http://andreytim.com/</id>
 <author>
   <name>Andrey Timoshpolsky</name>
@@ -26,7 +26,7 @@
   </author>
   <content type="html">&lt;h3 id=&quot;intro&quot;&gt;Intro&lt;/h3&gt;
 
-&lt;p&gt;A couple of days ago I came across an interesting problem on TopCoder - &lt;a href=&quot;http://community.topcoder.com/stat?c=problem_statement&amp;amp;pm=12426&quot;&gt;CentaurCompanyDiv2&lt;/a&gt;. What it asks is, basically, to find the number of sub-trees of a given tree. I am going to show how to do it in Java using dynamic programming approach and also without recursion. Check it out if interested!&lt;/p&gt;
+&lt;p&gt;A couple of days ago I came across an interesting problem on TopCoder - &lt;a href=&quot;http://community.topcoder.com/stat?c=problem_statement&amp;amp;pm=12426&quot;&gt;CentaurCompanyDiv2&lt;/a&gt;. What it asks is, basically, to find the number of sub-trees of a given tree. I am going to show how to do it in Java using dynamic programming approach with avoiding of ineffective recursion. Check it out if interested!&lt;/p&gt;
 
 &lt;h3 id=&quot;details&quot;&gt;Details&lt;/h3&gt;
 
