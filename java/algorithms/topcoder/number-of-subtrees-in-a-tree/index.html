@@ -137,15 +137,13 @@
 <p>For a start, let’s discuss a general approach. As you know, a tree is a recursive data structure and, actually, a huge amount of trees-related problems could be easily solved through recursion. So, thinking about formulating the solution in that way is always a good idea while working with any trees.<br />
 Well, let’s imagine that we are at some node <strong>N</strong> and we know the number of sub-trees for all trees rooted in its children. How can we express the number of subtrees for the tree rooted in our current node <strong>N</strong> (let’s call this tree <strong>T</strong>?  </p>
 
-<p><strong>First</strong>, we must gather all numbers of sub-trees from our children, because any sub-tree there is also a sub-tree for our <strong>T</strong>.  </p>
-
-<p><strong>Second</strong>, each sub-tree of a child <strong>C1</strong> rooted in <strong>C1</strong> could be connected through <strong>N</strong> to any sub-tree of any other child <strong>C2</strong> rooted in <strong>C2</strong>.</p>
-
-<p><strong>Finally</strong>, we shouldn’t forget that our root <strong>N</strong> is also a sub-tree.  </p>
+<p><strong>First</strong>, we must gather all numbers of sub-trees from our children, because any sub-tree there is also a sub-tree for our <strong>T</strong>.<br />
+<strong>Second</strong>, each sub-tree of a child <strong>C1</strong> rooted in <strong>C1</strong> could be connected through <strong>N</strong> to any sub-tree of any other child <strong>C2</strong> rooted in <strong>C2</strong>.<br />
+<strong>Finally</strong>, we shouldn’t forget that our root <strong>N</strong> is also a sub-tree.  </p>
 
 <p>Thus, we got the following formula:  </p>
 
-<p>*S(N) = sum(S(Ci)) + sum(SR(Ci)*SR(Cj)) + 1**,  where  </p>
+<p><em>S(N) = sum(S(Ci)) + sum(SR(Ci)*SR(Cj)) + 1</em>,  where  </p>
 
 <p><em>S(N)</em> - number of sub-trees for the tree rooted in our <strong>N</strong>,<br />
 <em>sum(S(Ci))</em> - sum of numbers of sub-trees for the children of <strong>N</strong>,<br />
@@ -153,15 +151,11 @@ Well, let’s imagine that we are at some node <strong>N</strong> and we know th
 
 <p>Now, let’s think about how to implement this approach.  </p>
 
-<p><strong>First</strong>, let’s assume for simplicity that the vertices of an input tree/graph are numbers from <strong>1</strong> to <strong>N</strong> (like in the TopCoder problem above).  </p>
-
-<p><strong>Second</strong>, we can see that it doesn’t matter which vertex to pick as an initial root, so lets pick the vertex <strong>1</strong>.</p>
-
-<p><strong>Third</strong>, as we should know the solution for all children of a current node at any step we must go from the bottom to the top of our tree. That’s actually an order of “backtracking” from <strong>depth-first search</strong> traversal.</p>
-
-<p><strong>Fourth</strong>, as our vertices are positive integers we can store the pre-calculated solutions in an array of integers. We need two keep track of not one but two arrays, actually - number of sub-trees, number of rooted sub-trees for each node.  </p>
-
-<p><strong>Fifth</strong>, to avoid recursion we could put all vertices to a stack during the <strong>DFS</strong> traversal and than use it as an iterator for our main-loop.  </p>
+<p><strong>First</strong>, let’s assume for simplicity that the vertices of an input tree/graph are numbers from <strong>1</strong> to <strong>N</strong> (like in the TopCoder problem above).<br />
+<strong>Second</strong>, we can see that it doesn’t matter which vertex to pick as an initial root, so lets pick the vertex <strong>1</strong>.<br />
+<strong>Third</strong>, as we should know the solution for all children of a current node at any step we must go from the bottom to the top of our tree. That’s actually an order of “backtracking” from <strong>depth-first search</strong> traversal.<br />
+<strong>Fourth</strong>, as our vertices are positive integers we can store the pre-calculated solutions in an array of integers. We need two keep track of not one but two arrays, actually - number of sub-trees, number of rooted sub-trees for each node.<br />
+<strong>Fifth</strong>, to avoid recursion we could put all vertices to a stack during the <strong>DFS</strong> traversal and than use it as an iterator for our main-loop.  </p>
 
 <p>So, let’s finally look at the Java code:  </p>
 
