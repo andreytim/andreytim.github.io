@@ -4,7 +4,7 @@
 <generator uri="https://github.com/mojombo/jekyll">Jekyll</generator>
 <link rel="self" type="application/atom+xml" href="http://andreytim.com/feed.xml" />
 <link rel="alternate" type="text/html" href="http://andreytim.com" />
-<updated>2014-11-28T22:40:50+03:00</updated>
+<updated>2014-11-28T22:46:20+03:00</updated>
 <id>http://andreytim.com/</id>
 <author>
   <name>Andrey Timoshpolsky</name>
@@ -31,33 +31,33 @@
 &lt;h3 id=&quot;details&quot;&gt;Details&lt;/h3&gt;
 
 &lt;p&gt;For a start, let’s discuss a general approach. As you know, a tree is a recursive data structure and, actually, a huge amount of trees-related problems could be easily solved through recursion. So, thinking about formulating the solution in that way is always a good idea while working with any trees.&lt;br /&gt;
-Well, let’s imagine that we are at some node &lt;strong&gt;N&lt;/strong&gt; and we know the number of sub-trees for all trees rooted in its children. How can we express the number of subtrees for the tree rooted in our current node N (let’s call this tree &lt;strong&gt;T&lt;/strong&gt;?  &lt;/p&gt;
+Well, let’s imagine that we are at some node &lt;strong&gt;N&lt;/strong&gt; and we know the number of sub-trees for all trees rooted in its children. How can we express the number of subtrees for the tree rooted in our current node &lt;strong&gt;N&lt;/strong&gt; (let’s call this tree &lt;strong&gt;T&lt;/strong&gt;?  &lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;First&lt;/strong&gt;, we must gather all numbers of sub-trees from our children, because any sub-tree there is also a sub-tree for our &lt;strong&gt;T&lt;/strong&gt;.  &lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;Second&lt;/strong&gt;, each sub-tree of child &lt;strong&gt;C1&lt;/strong&gt; rooted in &lt;strong&gt;C1&lt;/strong&gt; could be connected through &lt;strong&gt;N&lt;/strong&gt; to any sub-tree of any other child &lt;strong&gt;C2&lt;/strong&gt; rooted in &lt;strong&gt;C2&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Second&lt;/strong&gt;, each sub-tree of a child &lt;strong&gt;C1&lt;/strong&gt; rooted in &lt;strong&gt;C1&lt;/strong&gt; could be connected through &lt;strong&gt;N&lt;/strong&gt; to any sub-tree of any other child &lt;strong&gt;C2&lt;/strong&gt; rooted in &lt;strong&gt;C2&lt;/strong&gt;.&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;Finally&lt;/strong&gt;, we add our root N as a distinct sub-tree.  &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Finally&lt;/strong&gt;, we shouldn’t forget that our root &lt;strong&gt;N&lt;/strong&gt; is also a sub-tree.  &lt;/p&gt;
 
 &lt;p&gt;Thus, we got the following formula:  &lt;/p&gt;
 
 &lt;p&gt;*S(N) = sum(S(Ci)) + sum(SR(Ci)*SR(Cj)) + 1**,  where  &lt;/p&gt;
 
-&lt;p&gt;&lt;em&gt;S(N)&lt;/em&gt; - number of sub-trees for the tree rooted in our N,&lt;br /&gt;
-&lt;em&gt;sum(S(Ci))&lt;/em&gt; - sum of numbers of sub-trees for the children of N,&lt;br /&gt;
-&lt;em&gt;sum(SR(Ci)*SR(Cj))&lt;/em&gt; - sum of all combinations of sub-trees rooted in children of N.  &lt;/p&gt;
+&lt;p&gt;&lt;em&gt;S(N)&lt;/em&gt; - number of sub-trees for the tree rooted in our &lt;strong&gt;N&lt;/strong&gt;,&lt;br /&gt;
+&lt;em&gt;sum(S(Ci))&lt;/em&gt; - sum of numbers of sub-trees for the children of &lt;strong&gt;N&lt;/strong&gt;,&lt;br /&gt;
+&lt;em&gt;sum(SR(Ci)*SR(Cj))&lt;/em&gt; - sum of all combinations of sub-trees rooted in children of &lt;strong&gt;N&lt;/strong&gt;.  &lt;/p&gt;
 
 &lt;p&gt;Now, let’s think about how to implement this approach.  &lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;First&lt;/strong&gt;, let’s for simplicity assume that the vertices of an input tree or graph are numbers from 1 to N (like in the TopCoder problem above).  &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;First&lt;/strong&gt;, let’s assume for simplicity that the vertices of an input tree/graph are numbers from &lt;strong&gt;1&lt;/strong&gt; to &lt;strong&gt;N&lt;/strong&gt; (like in the TopCoder problem above).  &lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;Second&lt;/strong&gt;, we can see that it doesn’t matter which vertex to pick as an initial root, so lets pick the vertex 1.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Second&lt;/strong&gt;, we can see that it doesn’t matter which vertex to pick as an initial root, so lets pick the vertex &lt;strong&gt;1&lt;/strong&gt;.&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;Third&lt;/strong&gt;, as we should know the solution for all children of a current node at any step we must go from the bottom to the top of our tree. That’s actually an order of backtracking from depth-first search traversal.  &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Third&lt;/strong&gt;, as we should know the solution for all children of a current node at any step we must go from the bottom to the top of our tree. That’s actually an order of “backtracking” from &lt;strong&gt;depth-first search&lt;/strong&gt; traversal.&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;Fourth&lt;/strong&gt;, as our vertices are positive integers we can store the pre-calculated solutions in an array of integers. Also we need two keep track of two arrays - number of sub-trees, number of rooted sub-trees for each node.  &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Fourth&lt;/strong&gt;, as our vertices are positive integers we can store the pre-calculated solutions in an array of integers. We need two keep track of not one but two arrays, actually - number of sub-trees, number of rooted sub-trees for each node.  &lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;Fifth&lt;/strong&gt;, to avoid recursion we could put all vertices to a stack during the DFS traversal and than use it as an ordered list for a main-loop.  &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Fifth&lt;/strong&gt;, to avoid recursion we could put all vertices to a stack during the &lt;strong&gt;DFS&lt;/strong&gt; traversal and than use it as an iterator for our main-loop.  &lt;/p&gt;
 
 &lt;p&gt;So, let’s finally look at the Java code:  &lt;/p&gt;
 
@@ -96,9 +96,11 @@ Well, let’s imagine that we are at some node &lt;strong&gt;N&lt;/strong&gt; an
     &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;order&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;Just DFS, basically.&lt;br /&gt;
-That’s all for today. The full working code with tiny modifications for the TopCoder problem you can find on my &lt;a href=&quot;https://github.com/andreytim/jafar/blob/master/problems/src/main/java/com/andreytim/jafar/problems/treesgraphs/P54_CentaurCompanyDiv2.java&quot;&gt;github&lt;/a&gt;.&lt;br /&gt;
-Have a nice coding! &lt;/p&gt;
+&lt;p&gt;Just straight-forwards implementation of DFS, basically.&lt;/p&gt;
+
+&lt;p&gt;That’s all for today. The full working code with tiny modifications for the TopCoder problem you can find on my &lt;a href=&quot;https://github.com/andreytim/jafar/blob/master/problems/src/main/java/com/andreytim/jafar/problems/treesgraphs/P54_CentaurCompanyDiv2.java&quot;&gt;github&lt;/a&gt;.  &lt;/p&gt;
+
+&lt;p&gt;Have a nice coding! &lt;/p&gt;
 
   &lt;p&gt;&lt;a href=&quot;http://andreytim.com/java/algorithms/topcoder/number-of-subtrees-in-a-tree/&quot;&gt;Number of sub-trees in a tree&lt;/a&gt; was originally published by Andrey Timoshpolsky at &lt;a href=&quot;http://andreytim.com&quot;&gt;Soft Thoughts&lt;/a&gt; on November 28, 2014.&lt;/p&gt;</content>
 </entry>
